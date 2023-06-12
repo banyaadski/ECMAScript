@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box-content">
+
+    </div>
+    <script>
+        //         ""Получение данных о пользователе""
+
+        // Реализуйте функцию getUserData, которая принимает идентификатор пользователя (ID) в качестве аргумента и использует fetch для получения данных о пользователе с заданным ID с удаленного сервера. Функция должна возвращать промис, который разрешается с данными о пользователе в виде объекта. Если пользователь с указанным ID не найден, промис должен быть отклонен с соответствующим сообщением об ошибке.
+
+        // Подсказка, с последовательностью действий:
+        // getUserData использует fetch для получения данных о пользователе с удаленного сервера. Если запрос успешен (с кодом 200), функция извлекает данные из ответа с помощью response.json() и возвращает объект с данными о пользователе. Если запрос неуспешен, функция отклоняет промис с сообщением об ошибке.
+        //     
+        const url = 'http://www.mocky.io/v2/5944e07213000038025b6f30';
+
+        const getUserData = (url, param) => {
+            fetch(url)
+                .then(
+                    function (response) {
+                        if (response.status !== 200) {
+                            console.log('Ошибка ' +
+                                response.status);
+                            return;
+                        }
+                        response.json().then(function (data) {
+                            data.forEach(elem => {
+                                if (elem.id === param) {
+                                    console.log(elem);
+                                }
+                            });
+                            console.log(data);
+                        });
+                    }
+                )
+        }
+        // getUserData(url, 5)
+
+
+        // ""Отправка данных на сервер""
+
+        // Реализуйте функцию saveUserData, которая принимает объект с данными о пользователе в качестве аргумента и использует fetch для отправки этих данных на удаленный сервер для сохранения. Функция должна возвращать промис, который разрешается, если данные успешно отправлены, или отклоняется в случае ошибки.
+
+        // *Подсказка *
+        // // Пример использования функции
+        const data = {
+            name: 'John Smith',
+            age: 30,
+            email: 'john@example.com'
+        };
+        // fetch('http://www.mocky.io/v2/5944e07213000038025b6f30')
+        //     .then(function (response) {
+        //         return response.json()
+        //     })
+        //     .then(function (data) {
+        //         console.log('data', data)
+        //     })
+
+        const postData = async (url, data = {}) => {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            return response.json();
+        }
+
+        console.log(postData(url, data));
+        // saveUserData(user)
+        // .then(() => {
+        // console.log('User data saved successfully');
+        // })
+        // .catch(error => {
+        // console.log(error.message);
+        // });
+
+        // saveUserData использует fetch для отправки данных о пользователе на удаленный сервер для сохранения. Она отправляет POST-запрос на URL-адрес /users с указанием типа содержимого application/json и сериализует объект с данными о пользователе в JSON-строку с помощью JSON.stringify(). Если запрос успешен (с кодом 200), функция разрешает промис. Если запрос неуспешен, функция отклоняет промис с сообщени
+
+
+
+
+
+        // ""Изменение стиля элемента через заданное время""
+
+        // Напишите функцию changeStyleDelayed, которая принимает идентификатор элемента и время задержки (в миллисекундах) в качестве аргументов. Функция должна изменить стиль элемента через указанное время.
+
+        // // Пример использования функции
+        // changeStyleDelayed('myElement', 2000); // Через 2 секунды изменяет стиль элемента с id 'myElement'"
+        const boxElem = document.querySelector('.box-content');
+        const creElem = document.createElement('div');
+        creElem.setAttribute('id', 'font')
+        // creElem.id.add('font');
+        creElem.textContent = 'Вот такая вот ерунда';
+        boxElem.appendChild(creElem);
+
+        const changeStyleDelayed = (id, delay) => {
+            function changeStyle() {
+                const catchElem = document.getElementById('font');
+                catchElem.style.color = "blue";
+                catchElem.style.fontSize = '32px';
+            }
+            setTimeout(changeStyle, delay)
+        }
+
+
+        changeStyleDelayed('font', 5000);
+
+
+
+    </script>
+</body>
+
+</html>
