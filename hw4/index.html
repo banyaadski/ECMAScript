@@ -42,7 +42,7 @@
                     }
                 )
         }
-        // getUserData(url, 5)
+        getUserData(url, 5)
 
 
         // ""Отправка данных на сервер""
@@ -56,13 +56,7 @@
             age: 30,
             email: 'john@example.com'
         };
-        // fetch('http://www.mocky.io/v2/5944e07213000038025b6f30')
-        //     .then(function (response) {
-        //         return response.json()
-        //     })
-        //     .then(function (data) {
-        //         console.log('data', data)
-        //     })
+        
 
         const postData = async (url, data = {}) => {
             const response = await fetch(url, {
@@ -76,6 +70,8 @@
         }
 
         console.log(postData(url, data));
+        
+        
         // saveUserData(user)
         // .then(() => {
         // console.log('User data saved successfully');
